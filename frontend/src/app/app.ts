@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { DataCard } from './components/data-card/data-card';
@@ -22,14 +22,26 @@ export class App implements OnInit
   backendData: ApiResponse | null = null;
   errorMessage: string | null = null;
 
-  constructor( private http: HttpClient) {}
+  constructor( private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void
   {
-    this.http.get< ApiResponse>('/api/data').subscribe
+    this.http.get< ApiResponse>( '/api/data').subscribe
     ({
-      next: ( response) => this.backendData = response,
-      error: ( error) => this.errorMessage = 'Connection failed: ' + error
+      next: ( response) =>
+      {
+        console.log( 'Backend response received:', response);
+        this.backendData = response;
+
+        this.cdr.detectChanges();
+      },
+      error: ( error) =>
+      {
+        console.error( 'HTTP Error:', error);
+        this.errorMessage = 'Connection failed.';
+
+        this.cdr.detectChanges();
+      }
     });
   }
 }

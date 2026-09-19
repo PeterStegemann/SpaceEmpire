@@ -5,6 +5,7 @@ import { CommonModule} from "@angular/common";
 ({
   imports: [ CommonModule],
   selector: 'app-data-card',
+  standalone: true,
   styleUrl: './data-card.css',
   templateUrl: './data-card.html',
 })
