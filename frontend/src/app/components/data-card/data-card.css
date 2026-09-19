@@ -1,0 +1,15 @@
+.custom-card
+{
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0fdf4;
+  border: 2px dashed #16a34a;
+  border-radius: 8px;
+}
+
+.msg-text
+{
+  font-size: 1.2rem;
+  color: #15803d;
+  font-weight: bold;
+}
