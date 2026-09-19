@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Willkommen zu Ihrer App!</h1>
+  <p>Angular-Frontend & Spring Boot Backend (Maven-Multi-Modul)</p>
+
+  <div *ngIf="backendData">
+    <div class="status-card status-success">
+      <span>🟢</span> Verbindung erfolgreich!
+    </div>
+
+    <app-data-card [message]="backendData.message"></app-data-card>
+  </div>
+
+  <div *ngIf="errorMessage" class="status-card status-error">
+    <span>🔴</span> {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!backendData && !errorMessage" class="status-card status-loading">
+    <span>⏳</span> Lade Daten vom Backend...
+  </div>
+
+@if (backendData) {
+  <app-data-card [message]="backendData.message"></app-data-card>
+} @else if (errorMessage) {
+  <div class="status-card status-error">{{ errorMessage }}</div>
+} @else {
+  <div class="status-card status-loading">⏳ Lade Daten...</div>
+}
+</div>
